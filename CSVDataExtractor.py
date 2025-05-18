@@ -16,8 +16,9 @@ class Column:
         strlength=len(columnID_lowercase)
         column_temp=0
         for index in range(strlength):
-            column_temp=column_temp + int(columnID_lowercase[index]) - 61
-        self.column=column_temp
+            print(f"{columnID_lowercase[index]} at {index}")
+            column_temp=column_temp + (ord(columnID_lowercase[index]) - ord('a') + 1) * pow(26, index)
+        self.column=column_temp - 1
 
     def add(self, line, currentLine):
         if currentLine >= self.startRow:
@@ -94,12 +95,20 @@ class CSVImporter:
         self.close()
 
 if __name__ == "__main__":
-    importer = XLSXImporter("/home/xi/Downloads/Test1.xlsx")
-    importer.open()
-    columns = []
-    columns.append(Column(23, 0))
-    columns.append(Column(23, 4))
-    importer.doImport(columns)
-    importer.close()
-    columns[0].print()
-    columns[1].print()
+    #importer = XLSXImporter("/home/xi/Downloads/Test1.xlsx")
+    #importer.open()
+    #columns = []
+    #columns.append(Column(23, 0))
+    #columns.append(Column(23, 4))
+    #importer.doImport(columns)
+    #importer.close()
+    #columns[0].print()
+    #columns[1].print()
+
+    column = Column(0, 0)
+    column.setcolumn("AA")
+    print(f"{column.column}, shall be 26")
+    column.setcolumn("AC")
+    print(f"{column.column}, shall be 28")
+    column.setcolumn("AF")
+    print(f"{column.column}, shall be 31")
